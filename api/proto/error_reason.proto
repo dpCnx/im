@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package pb;
+option go_package = "im/api/pb";
+import "errors/errors.proto";
+
+enum ErrorReason {
+  option (errors.default_code) = 500;
+
+  MSG_SEND = 0 [(errors.code) = 402];
+}

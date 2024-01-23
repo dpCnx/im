@@ -1,0 +1,16 @@
+version: '3'
+services:
+  gateway:
+    image: gateway
+    container_name: gateway
+    restart: always
+    network_mode: bridge
+    ports:
+      - 9991:9991
+  logic:
+    image: logic
+    container_name: logic
+    restart: always
+    network_mode: bridge
+    ports:
+      - 9992:9992

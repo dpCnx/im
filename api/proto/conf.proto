@@ -1,0 +1,83 @@
+syntax = "proto3";
+package pb;
+
+option go_package = "im/api/pb";
+
+import "google/protobuf/duration.proto";
+
+message Bootstrap {
+  Server server = 1;
+  Data data = 2;
+  Log log = 3;
+}
+
+message Server {
+  GateWayConf gateway = 1;
+  LogicConfig logic = 2;
+  MsgConfig msg = 3;
+}
+
+message GateWayConf{
+  HTTP http = 1;
+  Ws ws = 2;
+  GRPC grpc = 3;
+}
+
+message LogicConfig{
+  GRPC grpc = 1;
+}
+
+message MsgConfig{
+  GRPC grpc = 1;
+}
+
+message HTTP {
+  string network = 1;
+  string addr = 2;
+  google.protobuf.Duration timeout = 3;
+}
+
+message GRPC {
+  string network = 1;
+  string addr = 2;
+  google.protobuf.Duration timeout = 3;
+}
+
+message Ws{
+  int64  readBufferSize = 1;
+  int64  writeBufferSize = 2;
+  int64  handshakeTimeout = 3;
+}
+
+message Data {
+  message Database {
+    string driver = 1;
+    string source = 2;
+  }
+  message Redis {
+    string network = 1;
+    string address = 2;
+  }
+  message Etcd{
+    string address = 1;
+  }
+  message Rabbitmq{
+    string address = 1;
+    string exchangeName = 2;
+    string queueName = 3;
+    string key = 4;
+  }
+  Database database = 1;
+  Redis redis = 2;
+  Etcd etcd = 3;
+  Rabbitmq rabbitmq = 4;
+}
+
+message Log{
+  string fileName = 1;
+  int64 maxSize = 2;
+  int32 maxBackups = 3;
+  int32 maxAge = 4;
+}
+
+

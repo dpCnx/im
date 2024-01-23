@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package pb;
+option go_package = "im/api/pb";
+import "common.proto";
+
+service Msg {
+  rpc SendMsg (SendMsgReq) returns (SendMsgResp);
+}
+
+message SendMsgReq {
+  Message msg = 1;
+}
+
+message SendMsgResp {}

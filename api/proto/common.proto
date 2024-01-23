@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package pb;
+option go_package = "im/api/pb";
+
+message Message {
+  int64 sendId = 1;
+  int64 recvId = 2;
+  string groupId = 3;
+  string clientMsgId = 4;
+  string serverMsgId = 5;
+  int32  senderPlatformId = 6;
+  string senderNickname = 7;
+  string senderFaceURL = 8;
+  SessionType  sessionType = 9;
+  ContentType  contentType = 10;
+  bytes  content = 11;
+  int64  seq = 12;
+  int64  createTime = 13;
+}
+
+enum PackageType {
+  PT_UNKNOWN = 0; // 未知
+  PT_SYNC = 1; // 消息同步触发
+  PT_HEARTBEAT = 2; // 心跳
+  PT_MESSAGE = 3; // 消息投递
+}
+
+enum SessionType{
+  SINGLE_CHAT_TYPE = 0; // 单个消息
+  GROUP_CHAT_TYPE = 1; // 群组消息
+  NOTIFICATION_CHAT_TYPE = 2; // 通知
+}
+
+enum ContentType {
+  Text = 0;
+  Picture = 1;
+  Voice = 2;
+  Video = 3;
+  File = 4;
+}
+
+message MessageToMq {
+  int64 pushUserId = 1;
+  Message message = 2;
+}

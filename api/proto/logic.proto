@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package pb;
+option go_package = "im/api/pb";
+
+service Logic {
+  // 添加好友
+  rpc AddFriend (AddFriendReq) returns (AddFriendResp);
+}
+
+message AddFriendReq {
+  int64 friend_id = 1; // 用户id
+  string remarks = 2; // 备注
+  string description = 3; // 描述
+}
+
+message AddFriendResp{}
